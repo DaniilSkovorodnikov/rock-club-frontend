@@ -1,4 +1,4 @@
-FROM node:20
+FROM node:18 AS build
 
 USER root
 WORKDIR /app
@@ -8,7 +8,7 @@ RUN npm i --legacy-peer-deps
 COPY / .
 RUN npm run build
 
-FROM node:20
+FROM node:18-slim
 
 WORKDIR /app
 
