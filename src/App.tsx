@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router-dom'
 import './App.css'
 import Auth from './pages/Auth'
 import Main from './pages/Main'
-import Layout from './components/Layout'
+import Layout from './components/Layout/Layout'
 
 function App() {
 
