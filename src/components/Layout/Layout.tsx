@@ -1,9 +1,10 @@
 import { AppShell, Burger, Flex, Group } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import React from'react';
-import { Link, Outlet } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 import Logo from '../Logo';
 import './Layout.scss';
+import NavLinks from './NavLinks';
 
 const Layout: React.FC = () => {
     const [opened, { toggle }] = useDisclosure();
@@ -28,10 +29,7 @@ const Layout: React.FC = () => {
                         visibleFrom='md'
                         style={{flex: 1}}
                     >
-                        <Link to='/'>Оставить заявку</Link>
-                        <Link to='/'>График репетиций</Link>
-                        <Link to='/'>О рок-клубе</Link>
-                        <Link to='/profile'>Личный кабинет</Link>
+                        <NavLinks/>
                     </Group>
                 </Group>
             </AppShell.Header>
@@ -42,10 +40,7 @@ const Layout: React.FC = () => {
                     direction='column'
                     gap='lg'
                 >
-                    <Link to='/'>Оставить заявку</Link>
-                    <Link to='/'>График репетиций</Link>
-                    <Link to='/'>О рок-клубе</Link>
-                    <Link to='/profile'>Личный кабинет</Link>
+                    <NavLinks/>
                 </Flex>
             </AppShell.Navbar>
             <AppShell.Main>

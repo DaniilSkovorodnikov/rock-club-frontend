@@ -4,6 +4,8 @@ import './index.css';
 import App from './App.tsx';
 import { AppShell, createTheme, MantineProvider } from '@mantine/core';
 import '@mantine/core/styles.css';
+import { Provider } from 'react-redux';
+import { store } from './store/store.ts';
 
 const theme = createTheme({
   fontFamily: 'Inter, sans-serif',
@@ -29,7 +31,9 @@ const theme = createTheme({
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <MantineProvider theme={theme}>
+      <Provider store={store}>
         <App />
+      </Provider>
     </MantineProvider>
   </StrictMode>,
 )

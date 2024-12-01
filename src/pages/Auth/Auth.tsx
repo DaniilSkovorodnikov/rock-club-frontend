@@ -5,6 +5,7 @@ import Logo from '../../components/Logo';
 import classNames from 'classnames';
 import RegistrationForm from '../../components/Auth/RegistrationForm';
 import LoginForm from '../../components/Auth/LoginForm';
+import BackButton from '../../components/BackButton/BackButton';
 
 type LoginForm = {
   email: string;
@@ -41,6 +42,7 @@ const Auth: React.FC = () => {
       h='100vh'
       className='auth'
     >
+        <BackButton className='auth-back'/>
         <Flex direction='column' className='auth-container'>
           <Center className='auth-logo'>
             <Logo/>

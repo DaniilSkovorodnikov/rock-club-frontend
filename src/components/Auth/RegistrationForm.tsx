@@ -1,27 +1,43 @@
 import { Button } from '@mantine/core';
 import classNames from 'classnames';
-import React from'react';
+import React, { useEffect } from'react';
 import { useForm } from 'react-hook-form';
+import { signUp } from '../../http/auth';
+import { RegistrationFormData } from '../../models/user';
+import { useAppDispatch } from '../../hooks/redux';
+import { useNavigate } from 'react-router-dom';
+import { AxiosError } from 'axios';
 
 interface RegistrationFormProps {
     displayRegistrationInputs: boolean;
 }
 
-type RegistrationFormData = {
-    name: string,
-    surname: string,
-    email: string,
-    password: string,
-    confirmPassword: string,
-}
-
 const RegistrationForm: React.FC<RegistrationFormProps> = ({displayRegistrationInputs}) => {
-    const {register, handleSubmit, formState: {errors}} = useForm<RegistrationFormData>();
+    const {register, handleSubmit, formState: {errors, isSubmitting, dirtyFields}, setError, watch, trigger} = useForm<RegistrationFormData>({
+        reValidateMode: 'onChange',
+    });
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
     
-    const registration = (data: RegistrationFormData) => {
-        // Make API request to login user
-        console.log(data);
+    const registration = async(data: RegistrationFormData) => {
+        try {
+            await signUp(dispatch, data);
+            navigate('/')
+        } catch (errorResponse) {
+            if(errorResponse instanceof AxiosError){
+                if(errorResponse.response?.status === 409){
+                    setError('email', {type: 'alreadyExists', message: 'Пользователь с таким email уже зарегистрирован'})
+                }
+            }
+        }
     };
+    
+    const password = watch('password');
+    useEffect(() => {
+        if(dirtyFields.confirmPassword){
+            trigger('confirmPassword')
+        }
+    }, [password, trigger, dirtyFields]);
 
     return (
         <form className={classNames('auth-form', {registrationVisible: displayRegistrationInputs})} onSubmit={handleSubmit(registration)}>
@@ -55,7 +71,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({displayRegistrationI
                     placeholder='Электронная почта'
                 />
                 {errors?.email && <p className='form-error'>
-                    Обязательное поле
+                    {errors.email.type === 'required' ? 'Обязательное поле' : errors.email.message}
                 </p>}
             </div>
             <div className="form-group loginGroup">
@@ -71,16 +87,21 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({displayRegistrationI
             </div>
             <div className="form-group registrationGroup">
                 <input
-                    {...register('confirmPassword', {required: true})}
+                    {...register('confirmPassword', {
+                        required: true,
+                        validate: (value: string) => {
+                            return value === watch('password');
+                        }
+                    })}
                     className='auth-input' 
                     type="password"
                     placeholder='Пароль еще раз'
                 />
                 {errors?.confirmPassword && <p className='form-error'>
-                    Обязательное поле
+                    {errors.confirmPassword.type === 'required' ? 'Обязательное поле' : 'Пароли не совпадают'}
                 </p>}
             </div>
-            <Button className='auth-submit' color='#DB1403' type='submit'>Зарегистрироваться</Button>
+            <Button className='auth-submit' color='#DB1403' type='submit' disabled={isSubmitting}>Зарегистрироваться</Button>
         </form>
     );
 };

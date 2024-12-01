@@ -5,7 +5,7 @@ const Profile: React.FC = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        navigate('/auth')
+        // navigate('/auth')
     })
 
     return (
