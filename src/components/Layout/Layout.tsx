@@ -1,7 +1,7 @@
 import { AppShell, Burger, Flex, Group } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import React from'react';
-import { NavLink, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import Logo from '../Logo';
 import './Layout.scss';
 import NavLinks from './NavLinks';
