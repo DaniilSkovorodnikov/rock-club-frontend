@@ -47,7 +47,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({displayRegistrationI
                     Обязательное поле
                 </p>}
             </div>
-            <div className="form-group registrationGroup">
+            <div className="form-group loginGroup">
                 <input
                     {...register('email', {required: true})}
                     className='auth-input' 
@@ -58,7 +58,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({displayRegistrationI
                     Обязательное поле
                 </p>}
             </div>
-            <div className="form-group registrationGroup">
+            <div className="form-group loginGroup">
                 <input
                     {...register('password', {required: true})}
                     className='auth-input' 
