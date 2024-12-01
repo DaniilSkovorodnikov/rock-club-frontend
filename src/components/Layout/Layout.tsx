@@ -31,7 +31,7 @@ const Layout: React.FC = () => {
                         <Link to='/'>Оставить заявку</Link>
                         <Link to='/'>График репетиций</Link>
                         <Link to='/'>О рок-клубе</Link>
-                        <Link to='/'>Личный кабинет</Link>
+                        <Link to='/profile'>Личный кабинет</Link>
                     </Group>
                 </Group>
             </AppShell.Header>
@@ -45,7 +45,7 @@ const Layout: React.FC = () => {
                     <Link to='/'>Оставить заявку</Link>
                     <Link to='/'>График репетиций</Link>
                     <Link to='/'>О рок-клубе</Link>
-                    <Link to='/'>Личный кабинет</Link>
+                    <Link to='/profile'>Личный кабинет</Link>
                 </Flex>
             </AppShell.Navbar>
             <AppShell.Main>

@@ -30,9 +30,7 @@ const theme = createTheme({
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <MantineProvider theme={theme}>
-      <BrowserRouter>
         <App />
-      </BrowserRouter>
     </MantineProvider>
   </StrictMode>,
 )
