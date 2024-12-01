@@ -1,7 +1,8 @@
 import Layout from "./components/Layout/Layout";
 import Auth from "./pages/Auth/Auth";
 import Main from "./pages/Main";
-import Profile from "./pages/Profile";
+import Profile from "./pages/Profile/Profile";
+import ProfileEdit from "./pages/ProfileEdit/ProfileEdit";
 
 export const routes = [
     {
@@ -19,6 +20,10 @@ export const routes = [
             {
                 path: 'profile',
                 element: <Profile/>
+            },
+            {
+                path: 'profile/edit',
+                element: <ProfileEdit/>
             }
         ]
     }

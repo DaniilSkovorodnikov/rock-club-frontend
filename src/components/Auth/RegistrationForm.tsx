@@ -44,7 +44,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({displayRegistrationI
             <div className="form-group registrationGroup">
                 <input
                     {...register('name', {required: true})}
-                    className='auth-input' 
+                    className='form-input' 
                     type="text"
                     placeholder='Имя'
                 />
@@ -55,7 +55,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({displayRegistrationI
             <div className="form-group registrationGroup">
                 <input
                     {...register('surname', {required: true})}
-                    className='auth-input' 
+                    className='form-input' 
                     type="text"
                     placeholder='Фамилия'
                 />  
@@ -66,7 +66,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({displayRegistrationI
             <div className="form-group loginGroup">
                 <input
                     {...register('email', {required: true})}
-                    className='auth-input' 
+                    className='form-input' 
                     type="text"
                     placeholder='Электронная почта'
                 />
@@ -77,7 +77,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({displayRegistrationI
             <div className="form-group loginGroup">
                 <input
                     {...register('password', {required: true})}
-                    className='auth-input' 
+                    className='form-input' 
                     type="password"
                     placeholder='Пароль'
                 />
@@ -93,7 +93,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({displayRegistrationI
                             return value === watch('password');
                         }
                     })}
-                    className='auth-input' 
+                    className='form-input' 
                     type="password"
                     placeholder='Пароль еще раз'
                 />

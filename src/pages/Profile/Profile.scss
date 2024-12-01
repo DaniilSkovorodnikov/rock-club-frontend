@@ -1,0 +1,27 @@
+.profile{
+    
+    &-groups{
+        align-self: flex-start;
+    }
+
+    &-name{
+        font-weight: 500;
+        text-transform: uppercase;
+    }
+
+    &-edit{
+        width: 26px;
+        height: 28px;
+        margin-left: 8px;
+    }
+
+    &-subtitle{
+        font-size: 18px;
+        font-weight: 400;
+        color: rgba(255,255,255,0.6);
+    }
+
+    &-groupList{
+        
+    }
+}

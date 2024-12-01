@@ -25,15 +25,13 @@ const theme = createTheme({
         }
       }
     })
-  }
+  },
 });
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <MantineProvider theme={theme}>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </MantineProvider>
-  </StrictMode>,
+  <MantineProvider theme={theme}>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </MantineProvider>,
 )

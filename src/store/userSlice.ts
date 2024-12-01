@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { User } from "../models/user";
+import { ProfileFormData, User } from "../models/user";
 
 interface UserState {
     isAuthenticated: boolean;
@@ -23,6 +23,11 @@ const userSlice = createSlice({
             state.isAuthenticated = false;
             state.user = null;
         },
+        updateProfile(state, action: PayloadAction<ProfileFormData>){
+            if(state.user){
+                state.user = {...state.user,...action.payload}
+            }
+        }
     },
 })
 

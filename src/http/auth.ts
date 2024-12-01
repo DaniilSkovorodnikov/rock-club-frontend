@@ -1,10 +1,26 @@
-import { RegistrationFormData, UserRegistrationResponse } from "../models/user";
+import { LoginFormData, ProfileFormData, RegistrationFormData, UserRegistrationResponse } from "../models/user";
 import { AppDispatch } from "../store/store";
 import { login } from "../store/userSlice";
-import { http } from "./axios";
+import { authHttp, http } from "./axios";
 
 export async function signUp(dispatch: AppDispatch, formData: RegistrationFormData){
-    const {access_token, ...user}: UserRegistrationResponse = await http.post('/auth/register', formData);
+    const {access_token, ...user}: UserRegistrationResponse = (await authHttp.post('/auth/register', formData)).data;
     dispatch(login(user))
     localStorage.setItem('access_token', access_token);
+}
+
+export async function signIn(dispatch: AppDispatch, formData: LoginFormData){
+    const {access_token, ...user}: UserRegistrationResponse = (await authHttp.post('/auth/login', formData)).data;
+    dispatch(login(user))
+    localStorage.setItem('access_token', access_token);
+}
+
+export async function getUser(dispatch: AppDispatch){
+    const user = (await http.get('/users/info')).data;
+    dispatch(login(user))
+}
+
+export async function updateUser(dispatch: AppDispatch, formData: ProfileFormData){
+    const updatedUser = (await http.put(`/`, formData)).data;
+    dispatch(login(updatedUser))
 }

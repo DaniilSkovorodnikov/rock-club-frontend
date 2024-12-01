@@ -9,3 +9,31 @@
     font-size: 12px;
     color: crimson;
 }
+
+.form-input, .form-textarea{
+    background-color: transparent;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    color: white;
+    font-family: inherit;
+    padding: 0 12px;
+
+    &::placeholder{
+        font-family: inherit;
+    }
+}
+
+.form-input{
+    height: 42px;
+    min-height: 42px;
+}
+
+.form-textarea{
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.form-submit{
+    text-transform: uppercase;
+    font-weight: 500;
+}
