@@ -2,7 +2,6 @@ import React, { useState } from'react';
 import './Auth.scss'
 import { Center, Flex, Text, UnstyledButton } from '@mantine/core';
 import Logo from '../../components/Logo';
-import classNames from 'classnames';
 import RegistrationForm from '../../components/Auth/RegistrationForm';
 import LoginForm from '../../components/Auth/LoginForm';
 import BackButton from '../../components/BackButton/BackButton';
