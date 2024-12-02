@@ -47,6 +47,7 @@ const LoginForm: React.FC = () => {
                     className='form-input'
                     type="password"
                     placeholder='Пароль'
+                    autoComplete='on'
                 />
                 {errors?.password && <p className='form-error'>
                     {errors.password.type === 'required' && 'Обязательное поле'}  

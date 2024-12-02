@@ -80,6 +80,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({displayRegistrationI
                     className='form-input' 
                     type="password"
                     placeholder='Пароль'
+                    autoComplete='on'
                 />
                 {errors?.password && <p className='form-error'>
                     Обязательное поле
@@ -96,6 +97,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({displayRegistrationI
                     className='form-input' 
                     type="password"
                     placeholder='Пароль еще раз'
+                    autoComplete='off'
                 />
                 {errors?.confirmPassword && <p className='form-error'>
                     {errors.confirmPassword.type === 'required' ? 'Обязательное поле' : 'Пароли не совпадают'}

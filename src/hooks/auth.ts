@@ -7,6 +7,7 @@ export function useAuthRequired(){
     const navigate = useNavigate();
 
     useEffect(() => {
+        
         if(!isAuthenticated){
             navigate('/auth')
         }

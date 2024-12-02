@@ -1,11 +1,12 @@
 import React, { useState } from'react';
 import './Auth.scss'
-import { Center, Flex, UnstyledButton } from '@mantine/core';
+import { Center, Flex, Text, UnstyledButton } from '@mantine/core';
 import Logo from '../../components/Logo';
 import classNames from 'classnames';
 import RegistrationForm from '../../components/Auth/RegistrationForm';
 import LoginForm from '../../components/Auth/LoginForm';
 import BackButton from '../../components/BackButton/BackButton';
+import { colors, textStyles } from '../../helpers/const';
 
 type LoginForm = {
   email: string;
@@ -47,12 +48,20 @@ const Auth: React.FC = () => {
           <Center className='auth-logo'>
             <Logo/>
           </Center>
-          <Flex justify='space-between'>
+          <Flex
+            justify='space-between'
+            align='center'
+            my='xl'
+          >
             <UnstyledButton onClick={() => handleChangeType('login')}>
-              <h3 className={classNames('auth-type', {active: !displayRegistrationInputs})}>Авторизация</h3>
+              <Text fz={textStyles.h3} c={!displayRegistrationInputs ? colors.white : colors.grayLight} className='auth-type'>
+                Авторизация
+                </Text>
             </UnstyledButton>
             <UnstyledButton onClick={() => handleChangeType('registration')}>
-              <h3 className={classNames('auth-type', {active: displayRegistrationInputs})}>Регистрация</h3>
+              <Text fz={textStyles.h3} c={displayRegistrationInputs ? colors.white : colors.grayLight} className='auth-type'>
+                Регистрация
+              </Text>
             </UnstyledButton>
           </Flex>
           {isRegistration ? <RegistrationForm displayRegistrationInputs={displayRegistrationInputs}/> :  <LoginForm/>}

@@ -7,7 +7,7 @@ interface UserState {
 }
 
 const initialState: UserState = {
-    isAuthenticated: !!localStorage.getItem('access_token'),
+    isAuthenticated: false,
     user: null,
 }
 
@@ -15,7 +15,7 @@ const userSlice = createSlice({
     name: "user",
     initialState,
     reducers: {
-        login(state, action: PayloadAction<User>) {
+        login(state, action: PayloadAction<User>) {            
             state.isAuthenticated = true;
             state.user = action.payload;
         },
