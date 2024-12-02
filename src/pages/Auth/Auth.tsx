@@ -42,7 +42,7 @@ const Auth: React.FC = () => {
       h='100vh'
       className='auth'
     >
-        <BackButton className='auth-back'/>
+        <BackButton to='/' className='auth-back'/>
         <Flex direction='column' className='auth-container'>
           <Center className='auth-logo'>
             <Logo/>

@@ -16,6 +16,9 @@ export async function signIn(dispatch: AppDispatch, formData: LoginFormData){
 }
 
 export async function getUser(dispatch: AppDispatch){
+    if(!localStorage.getItem('access_token')){
+        throw new Error('Miss access token')
+    }
     const user = (await http.get('/users/info')).data;
     dispatch(login(user))
 }

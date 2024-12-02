@@ -5,6 +5,8 @@ import { useAppSelector } from '../../hooks/redux';
 import { colors } from '../../helpers/const';
 import { ProfileFormData } from '../../models/user';
 import { useAuthRequired } from '../../hooks/auth';
+import BackButton from '../../components/BackButton/BackButton';
+import './ProfileEdit.scss'
 
 const ProfileEdit: React.FC = () => {
     const {user} = useAppSelector(state => state.userSlice);
@@ -24,7 +26,8 @@ const ProfileEdit: React.FC = () => {
     useAuthRequired();
 
     return (
-        <Center>
+        <Center className='profileEdit'>
+            <BackButton className='profileEdit-back'/>
             <Flex direction='column' w={{base: '100%', md: '65%'}}>
                 <form onSubmit={handleSubmit(saveProfile)}>
                     <Flex direction='column' gap='md'>

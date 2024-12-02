@@ -1,15 +1,23 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAppSelector } from "./redux";
+import { useAppDispatch, useAppSelector } from "./redux";
+import { getUser } from "../http/auth";
 
 export function useAuthRequired(){
-    const { isAuthenticated } = useAppSelector(state => state.userSlice)
+    const { isAuthenticated } = useAppSelector(state => state.userSlice);
+    const dispatch = useAppDispatch()
     const navigate = useNavigate();
 
     useEffect(() => {
-        
-        if(!isAuthenticated){
-            navigate('/auth')
+        const checkAuth = async () => {
+            try{
+                await getUser(dispatch)
+            } catch {
+                navigate('/auth')
+            }
         }
-    }, [isAuthenticated, navigate])
+        if(!isAuthenticated){
+            checkAuth();
+        }
+    }, [isAuthenticated, navigate, dispatch])
 }
