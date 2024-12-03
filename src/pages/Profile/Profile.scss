@@ -1,7 +1,7 @@
 .profile{
     
     &-groups{
-        align-self: flex-start;
+        width: 100%;
     }
 
     &-name{
@@ -19,9 +19,5 @@
         font-size: 18px;
         font-weight: 400;
         color: rgba(255,255,255,0.6);
-    }
-
-    &-groupList{
-        
     }
 }

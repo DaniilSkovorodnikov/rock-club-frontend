@@ -1,7 +1,9 @@
 export const colors = {
     white: '#fff',
     gray: 'rgba(255,255,255,0.6)',
-    grayLight: 'rgba(255,255,255,0.4)',
+    grayDark: 'rgba(255,255,255,0.4)',
+    grayInputDark: 'rgba(255,255,255,0.2)',
+    grayInput: '#1f1f1f'
 }
 
 export const textStyles = {

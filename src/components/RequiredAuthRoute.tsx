@@ -1,9 +1,9 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "./redux";
-import { getUser } from "../http/auth";
+import React, { useEffect } from'react';
+import { Outlet, useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../hooks/redux';
+import { getUser } from '../http/auth';
 
-export function useAuthRequired(){
+const RequiredAuthRoute: React.FC = () => {
     const { isAuthenticated } = useAppSelector(state => state.userSlice);
     const dispatch = useAppDispatch()
     const navigate = useNavigate();
@@ -20,4 +20,12 @@ export function useAuthRequired(){
             checkAuth();
         }
     }, [isAuthenticated, navigate, dispatch])
-}
+
+    if(!isAuthenticated){
+        return <></>
+    }
+    return (
+        <Outlet/>
+    );
+};
+export default RequiredAuthRoute;

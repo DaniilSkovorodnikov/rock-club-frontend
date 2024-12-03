@@ -53,12 +53,12 @@ const Auth: React.FC = () => {
             my='xl'
           >
             <UnstyledButton onClick={() => handleChangeType('login')}>
-              <Text fz={textStyles.h3} c={!displayRegistrationInputs ? colors.white : colors.grayLight} className='auth-type'>
+              <Text fz={textStyles.h3} c={!displayRegistrationInputs ? colors.white : colors.grayDark} className='auth-type'>
                 Авторизация
                 </Text>
             </UnstyledButton>
             <UnstyledButton onClick={() => handleChangeType('registration')}>
-              <Text fz={textStyles.h3} c={displayRegistrationInputs ? colors.white : colors.grayLight} className='auth-type'>
+              <Text fz={textStyles.h3} c={displayRegistrationInputs ? colors.white : colors.grayDark} className='auth-type'>
                 Регистрация
               </Text>
             </UnstyledButton>

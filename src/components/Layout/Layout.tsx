@@ -1,12 +1,12 @@
 import { AppShell, Burger, Flex, Group } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import React from'react';
+import React, { ReactNode } from'react';
 import { Outlet } from 'react-router-dom';
 import Logo from '../Logo';
 import './Layout.scss';
 import NavLinks from './NavLinks';
 
-const Layout: React.FC = () => {
+const Layout: React.FC<{children?: ReactNode}> = ({children}) => {
     const [opened, { toggle }] = useDisclosure();
 
     return (
@@ -45,6 +45,7 @@ const Layout: React.FC = () => {
             </AppShell.Navbar>
             <AppShell.Main>
                 <Outlet/>
+                {children}
             </AppShell.Main>
         </AppShell>
     );

@@ -1,16 +1,20 @@
-import React from'react';
-import { useAppSelector } from '../../hooks/redux';
+import React, { useEffect } from'react';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { NavLink } from 'react-router-dom';
-import { Center, Flex, Text, UnstyledButton } from '@mantine/core';
+import { Button, Center, Flex, Text, UnstyledButton } from '@mantine/core';
 import './Profile.scss'
 import { colors, textStyles } from '../../helpers/const';
 import editIcon from '../../assets/edit-icon.svg'
-import { useAuthRequired } from '../../hooks/auth';
+import { getMyGroups } from '../../http/groups';
 
 const Profile: React.FC = () => {
     const { user } = useAppSelector(state => state.userSlice)
-
-    useAuthRequired()
+    const { groups } = useAppSelector(state => state.groupSlice);
+    const dispatch = useAppDispatch();
+    
+    useEffect(() => {
+        getMyGroups(dispatch)
+    }, [dispatch])
 
     if(!user){
         return <></>
@@ -30,19 +34,24 @@ const Profile: React.FC = () => {
                     {user.description}
                 </Text>}
                 <div className='profile-groups'>
-                    <h3 className='profile-subtitle'>Группы</h3>
-                    <ul className='profile-groupList'>
-                        <li className='profile-groupItem'>
-                            <Text fz={textStyles.p}>
-                                10 красных Илонов Масков идут на Кавказ
-                            </Text>
-                        </li>
-                        <li>
-                            <Text fz={textStyles.p}>
-                                Двадцать один пилот
-                            </Text>
-                        </li>
-                    </ul>
+                    <Flex justify='space-between' align='center'>
+                        <h3 className='profile-subtitle'>Группы</h3>
+                        <NavLink to='create-group'>
+                            <Button>
+                                Создать группу
+                            </Button>   
+                        </NavLink>
+                    </Flex>
+                    {groups.length > 0 
+                        ? <ul className='profile-groupList'>
+                            {groups.map(group => <li className='profile-groupItem'>
+                                <Text fz={textStyles.p}>
+                                    {group.name}
+                                </Text>
+                            </li>)}
+                        </ul>
+                        : <Text fz={textStyles.p} c={colors.grayDark}>Вы пока не вступили ни в одну группу</Text>
+                    }
                 </div>
             </Flex>
         </Center>
