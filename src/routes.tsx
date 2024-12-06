@@ -9,6 +9,7 @@ import Schedule from "./pages/Schedule";
 import About from "./pages/About";
 import EditGroup from "./pages/EditGroup/EditGroup";
 import RequiredAuthRoute from "./components/RequiredAuthRoute";
+import GroupProfile from "./pages/GroupProfile/GroupProfile";
 
 export const routes = [
     {
@@ -38,6 +39,10 @@ export const routes = [
                     {
                         path: 'profile/create-group',
                         element: <EditGroup/>,
+                    },
+                    {
+                        path: 'profile/group/:id',
+                        element: <GroupProfile/>,
                     },
                     {
                         path: 'profile/group/:id/edit',

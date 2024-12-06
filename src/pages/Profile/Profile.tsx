@@ -45,9 +45,11 @@ const Profile: React.FC = () => {
                     {groups.length > 0 
                         ? <ul className='profile-groupList'>
                             {groups.map(group => <li className='profile-groupItem'>
-                                <Text fz={textStyles.p}>
-                                    {group.name}
-                                </Text>
+                                <NavLink to={`group/${group.id}`}>
+                                    <Text fz={textStyles.p}>
+                                        {group.name}
+                                    </Text>
+                                </NavLink>
                             </li>)}
                         </ul>
                         : <Text fz={textStyles.p} c={colors.grayDark}>Вы пока не вступили ни в одну группу</Text>

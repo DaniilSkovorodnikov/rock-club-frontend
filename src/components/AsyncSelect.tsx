@@ -1,5 +1,5 @@
-import { GroupBase, Props} from 'react-select';
-import ReactSelect from 'react-select/async';
+import { GroupBase} from 'react-select';
+import ReactSelect, {AsyncProps} from 'react-select/async';
 import { colors } from '../helpers/const';
 import './AsyncSelect.scss'
 
@@ -7,7 +7,7 @@ export default function AsyncSelect<
     Option,
     IsMulti extends boolean = false,
     Group extends GroupBase<Option> = GroupBase<Option>
->(props: Props<Option, IsMulti, Group>) {
+>(props: AsyncProps<Option, IsMulti, Group>) {
     return (
         <ReactSelect
             {...props}

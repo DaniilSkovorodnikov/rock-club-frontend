@@ -37,3 +37,9 @@
     text-transform: uppercase;
     font-weight: 500;
 }
+
+.backButton{
+    position: absolute;
+    left: 30px;
+    top: 80px;
+}

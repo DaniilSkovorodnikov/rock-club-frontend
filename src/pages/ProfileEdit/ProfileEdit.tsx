@@ -5,7 +5,6 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { colors } from '../../helpers/const';
 import { ProfileFormData } from '../../models/user';
 import BackButton from '../../components/BackButton/BackButton';
-import './ProfileEdit.scss'
 import { updateUser } from '../../http/auth';
 import { useNavigate } from 'react-router-dom';
 
@@ -39,7 +38,7 @@ const ProfileEdit: React.FC = () => {
 
     return (
         <Center className='profileEdit'>
-            <BackButton className='profileEdit-back'/>
+            <BackButton className='backButton'/>
             <Flex direction='column' w={{base: '100%', md: '65%'}}>
                 <form onSubmit={handleSubmit(saveProfile)}>
                     <Flex direction='column' gap='md'>

@@ -1,24 +1,54 @@
 import { Button, Center, Container, Flex, Text } from '@mantine/core';
-import React from'react';
+import React, { useEffect, useState } from'react';
 import BackButton from '../../components/BackButton/BackButton';
 import './EditGroup.scss'
 import { useForm } from 'react-hook-form';
 import { colors } from '../../helpers/const';
-import AsyncSelect from '../../components/AsyncSelect';
 import { GroupEditData } from '../../models/group';
-import { createGroup } from '../../http/groups';
-import { useAppDispatch } from '../../hooks/redux';
-import { useNavigate } from 'react-router-dom';
+import { createGroup, getGroupById, updateGroupRequest } from '../../http/groups';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { useNavigate, useParams } from 'react-router-dom';
+import { setGroupToEdit } from '../../store/groupSlice';
 
 const EditGroup: React.FC = () => {
-    const {register, formState: {isSubmitting, isValid}, handleSubmit} = useForm<GroupEditData>();
+    const {groupToEdit} = useAppSelector(state => state.groupSlice)
+    const {id} = useParams();
+    const {register, formState: {isSubmitting, isValid}, handleSubmit, setValue} = useForm<GroupEditData>();
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
     const saveGroup = async(data: GroupEditData) => {
-        await createGroup(dispatch, data);
-        navigate('/profile')
+        if(id){
+            await updateGroupRequest(dispatch, data);
+            navigate(`/profile/group /${id}`);
+        } else {
+            await createGroup(dispatch, data);
+            navigate('/profile')
+        }
     }
+
+    useEffect(() => {
+        const getGroup = async (id: string) => {
+            const group = await getGroupById(id);
+            dispatch(setGroupToEdit(group));
+        }
+        if(id && !groupToEdit){
+            getGroup(id)
+        }
+    }, [id, groupToEdit, dispatch]);
+
+    useEffect(() => {
+        return () => { dispatch(setGroupToEdit(null)); }
+    }, [dispatch])
+
+    useEffect(() => {
+        if(groupToEdit){
+            const groupFormKeys: (keyof GroupEditData)[] = ['name', 'description', 'id']
+            groupFormKeys.forEach((key) => {
+                setValue(key, groupToEdit[key]);
+            })
+        }
+    }, [groupToEdit, setValue])
 
     return (
       <Center className='groupEdit'>
@@ -31,15 +61,6 @@ const EditGroup: React.FC = () => {
                             <Text c={colors.grayDark}>Описание</Text>
                             <textarea className='form-textarea' rows={4} {...register('description')}/>
                         </Container>
-                        <AsyncSelect
-                            options={[]}
-                            placeholder='Начните вводить...'
-                            noOptionsMessage={() => 'Ничего не найдено'}
-                        />
-                        <Flex direction='column' gap='sm'>
-                            <p>Виктория Дайнеко</p>
-                            <p>Марина Сергеевна Абросимова</p>
-                        </Flex>
                         <Button className='form-submit' type='submit' color='#DB1403' disabled={isSubmitting || !isValid}>Сохранить</Button>
                   </Flex>
               </form>
