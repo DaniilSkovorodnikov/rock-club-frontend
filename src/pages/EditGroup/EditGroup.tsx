@@ -5,22 +5,27 @@ import './EditGroup.scss'
 import { useForm } from 'react-hook-form';
 import { colors } from '../../helpers/const';
 import { GroupEditData } from '../../models/group';
-import { createGroup, getGroupById, updateGroupRequest } from '../../http/groups';
+import { createGroup, getGroupById, updateGroupImageRequest, updateGroupRequest } from '../../http/groups';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { setGroupToEdit } from '../../store/groupSlice';
+import ImageInput from '../../components/Shared/ImageInput/ImageInput';
 
 const EditGroup: React.FC = () => {
     const {groupToEdit} = useAppSelector(state => state.groupSlice)
     const {id} = useParams();
     const {register, formState: {isSubmitting, isValid}, handleSubmit, setValue} = useForm<GroupEditData>();
+    const [groupImage, setGroupImage] = useState<File | null>(null);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
     const saveGroup = async(data: GroupEditData) => {
         if(id){
             await updateGroupRequest(dispatch, data);
-            navigate(`/profile/group /${id}`);
+            if(groupImage){
+                await updateGroupImageRequest(dispatch, id, groupImage);
+            }
+            navigate(`/profile/group/${id}`);
         } else {
             await createGroup(dispatch, data);
             navigate('/profile')
@@ -54,6 +59,9 @@ const EditGroup: React.FC = () => {
       <Center className='groupEdit'>
           <BackButton className='groupEdit-back'/>
           <Flex direction='column' w={{base: '100%', md: '65%'}}>
+            {id && <Flex justify='center'>
+                <ImageInput defaultImage={groupToEdit?.main_image} onChange={(image) => setGroupImage(image)}/>
+            </Flex>}
             <form onSubmit={handleSubmit(saveGroup)}>
                   <Flex direction='column' gap='md'>
                         <input className='form-input' type="text" placeholder='Название *' {...register('name', {required: true})}/>
@@ -61,7 +69,7 @@ const EditGroup: React.FC = () => {
                             <Text c={colors.grayDark}>Описание</Text>
                             <textarea className='form-textarea' rows={4} {...register('description')}/>
                         </Container>
-                        <Button className='form-submit' type='submit' color='#DB1403' disabled={isSubmitting || !isValid}>Сохранить</Button>
+                        <Button className='form-submit' type='submit' color='#DB1403' disabled={isSubmitting || (!isValid && !groupImage)}>Сохранить</Button>
                   </Flex>
               </form>
           </Flex>

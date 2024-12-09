@@ -1,6 +1,6 @@
 import { GroupBase} from 'react-select';
 import ReactSelect, {AsyncProps} from 'react-select/async';
-import { colors } from '../helpers/const';
+import { colors } from '../../../helpers/const';
 import './AsyncSelect.scss'
 
 export default function AsyncSelect<
@@ -28,10 +28,14 @@ export default function AsyncSelect<
                     neutral0: colors.grayInput,
                     neutral30: colors.grayInputDark,
                     neutral20: colors.grayInput,
+                    neutral80: colors.white,
                     primary: colors.grayInputDark,
                     primary25: colors.grayInputDark
                 }
             })}
+            noOptionsMessage={() => 'Ничего не найдено'}
+            loadingMessage={() => 'Загрузка'}
+            placeholder="Начните вводить"
         />
     );
 }

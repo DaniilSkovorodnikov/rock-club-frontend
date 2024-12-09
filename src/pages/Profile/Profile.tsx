@@ -6,6 +6,7 @@ import './Profile.scss'
 import { colors, textStyles } from '../../helpers/const';
 import editIcon from '../../assets/edit-icon.svg'
 import { getMyGroups } from '../../http/groups';
+import DefaultImage from '../../components/Shared/DefaultImage/DefaultImage';
 
 const Profile: React.FC = () => {
     const { user } = useAppSelector(state => state.userSlice)
@@ -13,8 +14,10 @@ const Profile: React.FC = () => {
     const dispatch = useAppDispatch();
     
     useEffect(() => {
-        getMyGroups(dispatch)
-    }, [dispatch])
+        if(!groups.length){
+            getMyGroups(dispatch)
+        }
+    }, [dispatch, groups])
 
     if(!user){
         return <></>
@@ -22,6 +25,7 @@ const Profile: React.FC = () => {
     return (
         <Center className='profile-container'>
             <Flex direction='column' align='center' w={{base: '100%', md: '70%'}}>
+                {user.main_image ? <img className='profile-image' src={user.main_image}/> : <DefaultImage type='user' size='avatar'/>}
                 <Text className='profile-name' fz={textStyles.h2} mb='sm' ta='center'>
                     {user.surname} {user.name}
                     <UnstyledButton>
@@ -44,12 +48,15 @@ const Profile: React.FC = () => {
                     </Flex>
                     {groups.length > 0 
                         ? <ul className='profile-groupList'>
-                            {groups.map(group => <li className='profile-groupItem'>
-                                <NavLink to={`group/${group.id}`}>
-                                    <Text fz={textStyles.p}>
-                                        {group.name}
-                                    </Text>
-                                </NavLink>
+                            {groups.map(group => <li className='profile-groupItem' key={group.id}>
+                                <Flex align='center' gap='xl'>
+                                    {group.main_image ? <img src={group.main_image} className='profile-groupImage'/> : <DefaultImage type='group' size='listIcon'/>}
+                                    <NavLink to={`group/${group.id}`}>
+                                        <Text fz={textStyles.p}>
+                                            {group.name}
+                                        </Text>
+                                    </NavLink>
+                                </Flex>
                             </li>)}
                         </ul>
                         : <Text fz={textStyles.p} c={colors.grayDark}>Вы пока не вступили ни в одну группу</Text>

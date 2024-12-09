@@ -1,9 +1,10 @@
 export interface User {
-    id: number;
+    id: string;
     name: string;
     surname: string;
     email: string;
     description?: string;
+    main_image?: string;
 }
 
 export interface RegistrationFormData extends Omit<User, 'id'> {

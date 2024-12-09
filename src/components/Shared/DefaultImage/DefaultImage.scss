@@ -1,0 +1,14 @@
+.defaultImage{
+    border-radius: 50%;
+    object-fit: cover;
+
+    &.avatar{
+        width: 150px;
+        height: 150px;
+    }
+
+    &.listIcon{
+        width: 80px;
+        height: 80px;
+    }
+}

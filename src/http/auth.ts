@@ -1,6 +1,6 @@
 import { LoginFormData, ProfileFormData, RegistrationFormData, UserRegistrationResponse } from "../models/user";
 import { AppDispatch } from "../store/store";
-import { login, updateProfile } from "../store/userSlice";
+import { login, updateProfile, updateProfileImage } from "../store/userSlice";
 import { authHttp, http } from "./axios";
 
 export async function signUp(dispatch: AppDispatch, formData: RegistrationFormData){
@@ -26,4 +26,11 @@ export async function getUser(dispatch: AppDispatch){
 export async function updateUser(dispatch: AppDispatch, formData: ProfileFormData){
     const updatedUser = (await http.patch(`/users/me`, formData)).data;
     dispatch(updateProfile(updatedUser))
+}
+
+export async function updateUserImage(dispatch: AppDispatch, image: File){
+    const formData = new FormData();
+    formData.append('image', image);
+    const avatarUrl = (await http.post('/users/me/images/main', formData, {headers: {"Content-Type": 'multipart/form-data'}})).data
+    dispatch(updateProfileImage(avatarUrl));
 }

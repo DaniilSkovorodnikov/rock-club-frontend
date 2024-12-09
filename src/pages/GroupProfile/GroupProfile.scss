@@ -1,5 +1,14 @@
 .groupProfile{
 
+    &-image{
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 32px;
+        align-self: center;
+    }
+
     &-edit{
         width: 26px;
         height: 28px;
@@ -8,9 +17,15 @@
 
     &-members{
         margin-top: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
     }
 
-    &-member{
-        font-weight: 700;
+    &-memberImage{
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
     }
 }

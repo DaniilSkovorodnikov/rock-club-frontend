@@ -27,9 +27,14 @@ const userSlice = createSlice({
             if(state.user){
                 state.user = {...state.user,...action.payload}
             }
+        },
+        updateProfileImage(state, action: PayloadAction<string>){
+            if(state.user){
+                state.user = {...state.user, main_image: action.payload}
+            }
         }
     },
 })
 
-export const { login, logout, updateProfile } = userSlice.actions;
+export const { login, logout, updateProfile, updateProfileImage } = userSlice.actions;
 export default userSlice.reducer;

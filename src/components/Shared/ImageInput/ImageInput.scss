@@ -1,0 +1,35 @@
+.imageInput{
+
+    &-nativeInput{
+        display: none;
+    }
+
+    &-customInput{
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background-color: black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative; 
+        cursor: pointer;
+    }
+
+    &-customInputContainer{
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+
+    &-noImage{
+        border-radius: 50%;
+        border: 3px solid #DB1403;
+
+        img{
+            width: 28px;
+            height: 23px;
+        }
+    }
+}
