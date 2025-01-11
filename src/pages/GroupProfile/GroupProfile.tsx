@@ -11,13 +11,16 @@ import { setCurrentActiveGroup, setGroupToEdit } from '../../store/groupSlice';
 import EditGroupMembers from '../../components/Group/EditGroupMembers/EditGroupMembers';
 import GroupMembers from '../../components/Group/GroupMembers/GroupMembers';
 import DefaultImage from '../../components/Shared/DefaultImage/DefaultImage';
+import { getMyProfile } from '../../http/auth';
 
 const GroupProfile: React.FC = () => {
     const {id} = useParams();
+    const {isAuthenticated, user} = useAppSelector(state => state.userSlice);
     const {currentActiveGroup: group} = useAppSelector(state => state.groupSlice);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const [membersEditMode, setEditMembersMode] = useState(false);
+    const isAdmin = user?.id === group?.leader.id;
 
     const handleEditGroup = () => {
         if(group) {
@@ -25,6 +28,15 @@ const GroupProfile: React.FC = () => {
             navigate('edit')
         }
     }
+
+    useEffect(() => {
+        const checkAuth = async() => {
+            await getMyProfile(dispatch);
+        }
+        if(!isAuthenticated){
+            checkAuth();
+        }
+    }, [isAuthenticated, dispatch])
 
     useEffect(() => {
         const getGroup = async (id: string) => {
@@ -51,16 +63,16 @@ const GroupProfile: React.FC = () => {
           <Flex direction='column' w={{base: '100%', md: '65%'}}>
                 {group.main_image ? <img className='groupProfile-image' src={group.main_image}/> : <DefaultImage type="group" size="avatar" className='groupProfile-image'/>}
                 <Text className='groupProfile-name' fz={textStyles.h2} ta='center'>
-                    {group?.name}
-                    <UnstyledButton onClick={handleEditGroup}>
+                    {group.name}
+                    {isAdmin && <UnstyledButton onClick={handleEditGroup}>
                         <img src={editIcon} alt="Редактировать" className='groupProfile-edit' />    
-                    </UnstyledButton>
+                    </UnstyledButton>}
                 </Text>
                 <Text ta='center' fz={textStyles.p} c={colors.gray}>Музыкальная группа</Text>
                 {group?.description && <Text mt='xl' c={colors.gray}>{group.description}</Text>}
                 <Flex justify='space-between' align='flex-end' mt='xl'>
                     <Text fz={textStyles.p} c={colors.gray}>Участники:</Text>
-                    {!membersEditMode && <Button onClick={() => setEditMembersMode(true)}>Редактировать участников</Button>}
+                    {isAdmin && !membersEditMode && <Button onClick={() => setEditMembersMode(true)}>Редактировать участников</Button>}
                 </Flex>
                 {membersEditMode 
                     ? <EditGroupMembers groupId={group.id} groupMembers={group.members} toReadMode={() => setEditMembersMode(false)}/>

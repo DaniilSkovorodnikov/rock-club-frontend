@@ -2,14 +2,15 @@ import Layout from "./components/Layout/Layout";
 import Auth from "./pages/Auth/Auth";
 import Main from "./pages/Main";
 import RouterErrorBoundary from "./pages/RouterErrorBoundary";
-import Profile from "./pages/Profile/Profile";
+import MyProfile from "./pages/MyProfile/MyProfile";
 import ProfileEdit from "./pages/ProfileEdit/ProfileEdit";
 import JoinRequest from "./pages/JoinRequest";
-import Schedule from "./pages/Schedule";
+import Schedule from "./pages/Schedule/Schedule";
 import About from "./pages/About";
 import EditGroup from "./pages/EditGroup/EditGroup";
 import RequiredAuthRoute from "./components/RequiredAuthRoute";
 import GroupProfile from "./pages/GroupProfile/GroupProfile";
+import UserProfile from "./pages/UserProfile";
 
 export const routes = [
     {
@@ -30,22 +31,18 @@ export const routes = [
                 children: [
                     {
                         path: 'profile',
-                        element: <Profile/>,
+                        element: <MyProfile/>,
                     },
                     {
                         path: 'profile/edit',
                         element: <ProfileEdit/>
                     },
                     {
-                        path: 'profile/create-group',
+                        path: 'create-group',
                         element: <EditGroup/>,
                     },
                     {
-                        path: 'profile/group/:id',
-                        element: <GroupProfile/>,
-                    },
-                    {
-                        path: 'profile/group/:id/edit',
+                        path: 'group/:id/edit',
                         element: <EditGroup/>
                     },
                 ]
@@ -61,6 +58,14 @@ export const routes = [
             {
                 path: 'about',
                 element: <About/>
+            },
+            {
+                path: 'group/:id',
+                element: <GroupProfile/>,
+            },
+            {
+                path: '/user/:id',
+                element: <UserProfile/>
             },
         ]
     }

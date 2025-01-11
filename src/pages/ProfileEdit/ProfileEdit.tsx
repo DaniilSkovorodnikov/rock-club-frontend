@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { colors } from '../../helpers/const';
 import { ProfileFormData } from '../../models/user';
 import BackButton from '../../components/BackButton/BackButton';
-import { updateUser, updateUserImage } from '../../http/auth';
+import { updateUser, updateUserImage } from '../../http/user';
 import { useNavigate } from 'react-router-dom';
 import ImageInput from '../../components/Shared/ImageInput/ImageInput';
 

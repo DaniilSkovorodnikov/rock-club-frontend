@@ -22,6 +22,10 @@
         gap: 20px;
     }
 
+    &-member, &-memberContainer{
+        width: max-content;
+    }
+
     &-memberImage{
         width: 80px;
         height: 80px;

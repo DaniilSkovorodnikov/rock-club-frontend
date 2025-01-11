@@ -26,3 +26,12 @@ ul{
     padding: 0;
     list-style: none;
 }
+
+.mantine-DateInput{
+
+    &-day, &-calendarHeaderLevel, &-calendarHeaderControl{
+        &:hover{
+            background-color: #797979 !important;
+        }
+    }
+}

@@ -25,6 +25,10 @@
         object-fit: cover;
     }
 
+    &-groupContainer, &-groupItem{
+        width: max-content;
+    }
+
     &-name{
         font-weight: 500;
         text-transform: uppercase;

@@ -1,0 +1,56 @@
+.schedule{
+
+    &-title{
+        text-transform: uppercase;
+    }
+
+    .fc-timegrid-slot{
+        height: 30px;
+        border-top: none;
+        border-right: 3px solid black;
+        color: #999999;
+    }
+
+    .fc-timegrid-axis, .fc-col-header-cell{
+        font-weight: 400;
+        border: none;
+        background-color: #171717;
+        border-right: 3px solid black;
+
+        &.fc-day-today{
+            background-color: #292929;
+            border-right: 3px solid black;
+        }
+
+        div a{
+            color: #999999;
+        }
+    }
+
+    .fc-timegrid-col {
+        background-color: #171717;
+        border-right: 3px solid black;
+        
+
+        &.fc-day-today{
+            background-color: #292929;
+            border-right: 3px solid black;
+        }
+    }
+
+    .fc-scrollgrid, .fc-col-header, .fc-timegrid, td[role=presentation], th[role=presentation], .fc-day-today {
+        border: none;
+    }
+
+    .fc-event{
+        box-shadow: 0 0 0 1px #292929;
+        border: none;
+        background-color: #292929;
+        border-radius: 0;
+    }
+
+    .fc-event-title-container{
+        display: flex;
+        align-items: flex-end;
+    }
+}
