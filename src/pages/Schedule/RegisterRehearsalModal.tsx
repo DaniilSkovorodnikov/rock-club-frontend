@@ -7,13 +7,14 @@ import { getUserBySearchParams } from '../../http/groups';
 import { DateInput, TimeInput } from '@mantine/dates';
 import AsyncSelect from '../../components/Shared/AsyncSelect/AsyncSelect';
 import dayjs from 'dayjs';
+import { ScheduleItem } from '../../models/shared';
 
 type UserOption = {label: string, value: User}
 
 const RegisterRehearsalModal: React.FC<ModalProps> = (props) => {
-    const [rehearsalInfo, setRehearsalInfo] = useState<any>({})
+    const [rehearsalInfo, setRehearsalInfo] = useState<Partial<ScheduleItem>>({})
 
-    const changeRehearsalInfo = (field, value) => {
+    const changeRehearsalInfo = (field: keyof ScheduleItem, value: string | boolean | User | undefined | Date) => {
         setRehearsalInfo(prevState => ({...prevState, [field]: value}));
     }
 
@@ -34,7 +35,7 @@ const RegisterRehearsalModal: React.FC<ModalProps> = (props) => {
                         defaultOptions={[]}
                         loadOptions={loadOptions}
                         onChange={opt => changeRehearsalInfo('owner', opt?.value)}
-                        value={{value: rehearsalInfo.owner, label: rehearsalInfo.owner?.name}}
+                        value={rehearsalInfo.owner ? {value: rehearsalInfo.owner, label: rehearsalInfo.owner?.name} : undefined}
                     />
                     <Checkbox
                         label='Записаться индивидуально'
@@ -47,7 +48,7 @@ const RegisterRehearsalModal: React.FC<ModalProps> = (props) => {
                         mt='md'
                         minDate={new Date()}
                         maxDate={dayjs(new Date()).add(1, 'month').toDate()}
-                        onChange={value => changeRehearsalInfo('date', value)}
+                        onChange={value => changeRehearsalInfo('date', value as Date)}
                     />
                     <Flex justify='space-between' gap='md' align='center' mt='md'>
                         <TimeInput
